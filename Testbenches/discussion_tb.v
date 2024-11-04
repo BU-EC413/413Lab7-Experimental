@@ -78,8 +78,15 @@ module discussion_tb;
       #10;
 		
       Reset = 0;
+
+
       #100;
       
+      // stop simulation after 1000 ns
+      #1000;
+      $stop;
+      
+
    end
 	
    always begin
