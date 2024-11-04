@@ -8,7 +8,7 @@ module stallmux(wb, m, ex, MemToReg, RegWrite,
    output [6:0] ex;
    reg [1:0]    wb;
    reg [1:0]    m;
-   reg [13:0]   ex;
+   reg [6:0]   ex;
    
    input        MemToReg, RegWrite, MemRead, MemWrite, RegDst, AluSrc, HazardMuxSelect;
    input [1:0]  AluMux;
