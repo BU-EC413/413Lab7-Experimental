@@ -1,4 +1,4 @@
-// src/hello_world.v
+// Testbenches/hello_world.v
 `timescale 1ns / 1ps
 
 module hello_world;
