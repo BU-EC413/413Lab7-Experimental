@@ -26,7 +26,7 @@ jobs:
       # Step 3: Compile Verilog Code
       - name: Compile Hello World Verilog
         run: |
-          iverilog -o hello_world_output src/hello_world.v
+          iverilog -o hello_world_output Testbenches/hello_world.v
 
       # Step 4: Run Simulation
       - name: Run Hello World Simulation
