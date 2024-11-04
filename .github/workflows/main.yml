@@ -24,7 +24,7 @@ jobs:
       - name: Compile Verilog Code
         run: |
           # Compile student's code with the instructor-provided testbench
-          iverilog -o simulation_output -s discussion_tb Lab_7_v_files/*.v
+          iverilog -o simulation_output -s discussion_tb Lab_7_v_files/*.v Modified_Codes/*.v
 
       # Step 4: Run Simulation and Capture Output
       - name: Run Simulation
