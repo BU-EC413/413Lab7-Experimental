@@ -12,7 +12,7 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to v3
 
       # Step 2: Install Icarus Verilog
       - name: Install Icarus Verilog
@@ -39,8 +39,7 @@ jobs:
           
       # Optional: Upload results as an artifact for later review
       - name: Upload Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: results-${{ github.actor }}
           path: results.txt
-
