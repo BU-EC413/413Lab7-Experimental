@@ -30,7 +30,7 @@ module discussion_tb;
    wire [31:0] out;
    
    // Instantiate the Unit Under Test (UUT)
-   CPU uut (
+   CPU_original uut (
             .out(out), 
             .clk(clk), 
             .Reset(Reset), 
