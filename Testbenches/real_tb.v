@@ -116,11 +116,11 @@ module real_tb;
 
       // check for instruction add $R5, $R1, $R4
       #10;
-      check_output(out, 32'd423);
+      check_output(out, 32'd569);
 
       // check for instruction slt $R6, $R3, $R5
       #10;
-      check_output(out, 32'd0);
+      check_output(out, 32'd1);
 
       // check for instruction LW $R4, 4(R0)
       #10;
@@ -128,14 +128,14 @@ module real_tb;
 
       // check for instruction sub $R7, $R4, $R6
       #10;
-      check_output(out, 32'd146);
+      check_output(out, 32'd3);
 
       // No check for instruction SW $R7, 0(R0)
       #10;
 
       // check for instruction add R8, R7, R2
       #10;
-      check_output(out, 32'd92);
+      check_output(out, 32'd95)
 
 
       // Wait for simulation time to reach 170 ns
