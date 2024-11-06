@@ -1,12 +1,15 @@
-module pipecontrol(opcode, equal, RegDst, AluOp, AluSrc, BranchMux, MemRead, MemWrite, ZeroMux, RegWrite, MemToReg, IfFlush);
+module pipecontrol(opcode, equal, RegDst, AluOp, AluSrc, BranchMux_Out, MemRead, MemWrite, ZeroMux, RegWrite, MemToReg, IfFlush);
    input     [5:0] opcode;
    input           equal;
-   output [1:0]    AluOp, BranchMux;
+   output [1:0]    AluOp, BranchMux_Out;
    output          RegDst, AluSrc, MemRead, MemWrite, ZeroMux, RegWrite, MemToReg, IfFlush;
    reg [1:0]       AluOp;
    reg             RegDst, AluSrc, MemRead, MemWrite, ZeroMux, RegWrite, MemToReg, IfFlush;
    reg [2:0]       caseoperation;
-   reg [1:0]       BranchMux;
+   reg [2:0]       BranchMux;
+
+   wire[1:0] BranchMux_Out;
+   assign BranchMux_Out = BranchMux [1:0];  
    
    parameter rformat = 0;
    parameter    iformat = 1;
