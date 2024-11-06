@@ -1,4 +1,4 @@
-name: Verilog Code Runs Properly
+name: Given Verilog Code Runs Properly
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Check out repository
-        uses: actions/checkout@v4  # Updated to v3
+        uses: actions/checkout@v4
 
       # Step 2: Install Icarus Verilog
       - name: Install Icarus Verilog
@@ -23,7 +23,7 @@ jobs:
       # Step 3: Compile Verilog Code with predefined testbench
       - name: Compile Verilog Code
         run: |
-          # Compile student's code with the instructor-provided testbench
+          # Compile the code with the testbench
           iverilog -o simulation_output -s dummy_tb Lab_7_v_files/*.v Modified_Codes/*.v Testbenches/*.v
 
       # Step 4: Run Simulation and Capture Output
@@ -32,14 +32,24 @@ jobs:
           # Run the compiled simulation and save the output to results.txt
           vvp simulation_output > results.txt
 
-      # Step 5: Show Test Results in GitHub Actions Logs
+      # Step 5: Check Simulation Results
+      - name: Check Simulation Results
+        run: |
+          if grep -q "FAIL" results.txt; then
+            echo "Simulation failed."
+            exit 1
+          else
+            echo "Simulation passed."
+          fi
+
+      # Step 6: Show Test Results in GitHub Actions Logs
       - name: Output Simulation Results
         run: |
           cat results.txt  # Display results in the Actions log
           
-      # Step 6: Upload results as an artifact for later review
+      # Step 7: Upload Results as an Artifact for Later Review
       - name: Upload Results
-        uses: actions/upload-artifact@v4  # Updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: results-${{ github.actor }}
           path: results.txt

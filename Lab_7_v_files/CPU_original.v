@@ -1,4 +1,4 @@
-module CPU(out, clk, Reset, LoadInstructions, Instruction);
+module CPU_original(out, clk, Reset, LoadInstructions, Instruction);
    
    output [31:0] out;
    input         Reset, LoadInstructions, clk;
