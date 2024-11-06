@@ -5,10 +5,13 @@ module stallmux(wb, m, ex, MemToReg, RegWrite,
    
    output [1:0] wb;
    output [1:0] m;
-   output [6:0] ex;
+   output [6:0] ex_out;
    reg [1:0]    wb;
    reg [1:0]    m;
    reg [13:0]   ex;
+
+   wire [6:0] ex_out;
+   assign ex_out = ex[6:0];
    
    input        MemToReg, RegWrite, MemRead, MemWrite, RegDst, AluSrc, HazardMuxSelect;
    input [1:0]  AluMux;
