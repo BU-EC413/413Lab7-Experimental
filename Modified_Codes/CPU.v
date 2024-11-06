@@ -183,10 +183,9 @@ module CPU(out, clk, Reset, LoadInstructions, Instruction);
    
    /////////////////   EX Stage ///////////////////////////////////////
    
-
-   mux2to1 ImmAluBMux(AluIB, ALUB_MUXout, IDEX_Immediate, EX_AluSrc);
+   mux2to1 ImmAluBMux(AluIB, IDEX_B, IDEX_Immediate, EX_AluSrc);
    
-   alu MarkAlu(AluIA,
+   alu MarkAlu(IDEX_A,
                AluIB,
                EX_AluCntrlOut[3:0],
                EX_AluCntrlOut[8:4],
@@ -207,17 +206,6 @@ module CPU(out, clk, Reset, LoadInstructions, Instruction);
    
    ///////////////// Forwarding Unit //////////////////////////////////
    
-   //added for AluA
-   wire [31:0]AluIA;
-   mux3to1_32bit ALU_A(AluIA,IDEX_A,WriteBackData,MemAluOut,ForwardA);
-   
-   wire [31:0] ALUB_MUXout;
-   mux3to1_32bit ALU_B(ALUB_MUXout,IDEX_B,WriteBackData,MemAluOut,ForwardB);
-   
-   wire [1:0]ForwardA,ForwardB;
-   ForwardingUnit Forward(IDEX_Rs,IDEX_Rt,MemDest,EXMEM_WBControl,WriteBackDest,WB_WBControl,ForwardA,ForwardB);
-   
-   //addition ends  
    
    ////////////////   EX/MEM  /////////////////////////////////////////
    
