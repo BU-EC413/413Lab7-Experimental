@@ -32,7 +32,19 @@ jobs:
           # Run the compiled simulation and save the output to results.txt
           vvp simulation_output > results.txt
 
-      # Step 5: Check Simulation Results
+      # Step 5: Show Test Results in GitHub Actions Logs
+      - name: Output Simulation Results
+        run: |
+          cat results.txt  # Display results in the Actions log
+          
+      # Step 6: Upload Results as an Artifact for Later Review
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ github.actor }}
+          path: results.txt
+
+      # Step 7: Check Simulation Results
       - name: Check Simulation Results
         run: |
           if grep -q "FAIL" results.txt; then
@@ -41,15 +53,3 @@ jobs:
           else
             echo "Simulation passed."
           fi
-
-      # Step 6: Show Test Results in GitHub Actions Logs
-      - name: Output Simulation Results
-        run: |
-          cat results.txt  # Display results in the Actions log
-          
-      # Step 7: Upload Results as an Artifact for Later Review
-      - name: Upload Results
-        uses: actions/upload-artifact@v4
-        with:
-          name: results-${{ github.actor }}
-          path: results.txt
