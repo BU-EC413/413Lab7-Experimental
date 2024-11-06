@@ -24,6 +24,9 @@ jobs:
       - name: Compile Verilog Code
         run: |
           # Compile the code with the testbench
+          ls -al Lab_7_v_files/
+          ls -al Modified_Codes/
+          ls -al Testbenches/
           iverilog -o simulation_output -s dummy_tb Lab_7_v_files/*.v Modified_Codes/*.v Testbenches/*.v
 
       # Step 4: Run Simulation and Capture Output
