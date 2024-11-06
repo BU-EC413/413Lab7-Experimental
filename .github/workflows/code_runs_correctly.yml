@@ -1,5 +1,4 @@
-name: Verilog Autograder
-
+name: Verilog Code Results are Correct
 on:
   push:
     branches:

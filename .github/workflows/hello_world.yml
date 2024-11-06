@@ -1,4 +1,4 @@
-name: Verilog Hello World CI
+name: Env Setup and Hello World Simulation
 
 on:
   push:
