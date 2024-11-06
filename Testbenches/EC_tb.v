@@ -81,6 +81,12 @@ module EC_tb;
       // to test for RAW hazard, we will lw r3 from address 4
       Instruction = 32'b100011_00000_00011_0000000000000100; // lw $R3, 4($0)
       // r3 should have 92 now
+
+      #10
+      // addi r3, r3, 1
+      Instruction = 32'b001000_00011_00011_0000000000000001; // addi $R3, $R3, 1
+
+      #10
     
       LoadInstructions = 0;
       Reset = 1;
@@ -88,9 +94,9 @@ module EC_tb;
 		
       Reset = 0;
 
-      #50
+      #130
       // Expected value after execution of instructions
-      check_output(out, 32'd92);
+      check_output(out, 32'd93); // 93 is the expected value of r3 after the last instruction, incorrect value is 1
 
 
       $finish;
