@@ -30,7 +30,7 @@ module real_tb;
    wire [31:0] out;
    
    // Instantiate the Unit Under Test (UUT)
-   CPU_original uut (
+   CPU uut (
             .out(out), 
             .clk(clk), 
             .Reset(Reset), 
@@ -38,6 +38,20 @@ module real_tb;
             .Instruction(Instruction)
             );
    
+   task check_output;
+      input [31:0] out;
+      input [31:0] EXPECTED_VALUE_AT_TIME;
+      begin
+         // Expected value at 170 ns
+         if (out !== EXPECTED_VALUE_AT_TIME) begin
+            $display("FAIL at time %t ns: out = %h, expected %h", $time, out, EXPECTED_VALUE_AT_TIME);
+            $finish;
+         end else begin
+            $display("PASS at time %t ns: out = %h", $time, out);
+         end
+      end
+   endtask
+
    initial begin
       // Initialize Inputs
       clk = 0;
@@ -79,11 +93,57 @@ module real_tb;
 		
       Reset = 0;
 
+      // Wait for simulation time to reach 170 ns
+      // check for instruction addi $R1, $0, 423
+      #40;
+      check_output(out, 32'd423);
 
-      #100;
+      // check for instruction addi $R2, $0, 92
+      #10;
+      check_output(out, 32'd92);
+
+      // check for instruction addi $R3, $0, 13
+      #10;
+      check_output(out, 32'd13);
+
+      // check for instruction addi $R4, $0, 146
+      #10;
+      check_output(out, 32'd146);
+
+      // check for instruction addi $R5, $0, 5
+      #10;
+      check_output(out, 32'd5);
+
+      // check for instruction add $R5, $R1, $R4
+      #10;
+      check_output(out, 32'd423);
+
+      // check for instruction slt $R6, $R3, $R5
+      #10;
+      check_output(out, 32'd0);
+
+      // check for instruction LW $R4, 4(R0)
+      #10;
+      check_output(out, 32'd4);
+
+      // check for instruction sub $R7, $R4, $R6
+      #10;
+      check_output(out, 32'd146);
+
+      // No check for instruction SW $R7, 0(R0)
+      #10;
+
+      // check for instruction add R8, R7, R2
+      #10;
+      check_output(out, 32'd92);
+
+
+      // Wait for simulation time to reach 170 ns
+
+      // #100;
       
-      // stop simulation after 1000 ns
-      #1000;
+      // // stop simulation after 1000 ns
+      // #1000;
       $finish;
       
 
