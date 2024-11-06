@@ -1,4 +1,4 @@
-module stallmux(wb, m, ex, MemToReg, RegWrite,
+module stallmux(wb, m, ex_out, MemToReg, RegWrite,
                 MemRead, MemWrite,
                 RegDst, AluOp, AluSrc, AluMux, HiLoEnable,
                 HazardMuxSelect);
