@@ -135,7 +135,7 @@ module real_tb;
 
       // check for instruction add R8, R7, R2
       #10;
-      check_output(out, 32'd95)
+      check_output(out, 32'd95);
 
 
       // Wait for simulation time to reach 170 ns
